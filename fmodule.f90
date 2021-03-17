@@ -1,5 +1,5 @@
-program findstring
+function FINDSTRING()
 
+    print *, "Teste de chamada do fortran ok!"
 
-
-end program findstring
+end function FINDSTRING

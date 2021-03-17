@@ -1,13 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-char* OpenFile(/*char *filename*/int flag){
+char* OpenFile(char filename[], int flag){
     FILE *fp;
     char c;
     int n=0, lines=0;
     char *m = (char*) malloc(sizeof(char));
 
-    if ((fp=fopen ("teste1.txt","r")) != NULL) {
+    if ((fp=fopen (filename,"r")) != NULL) {
         if (flag == 0){
             while( ((c=fgetc(fp)) !=EOF) && (lines == 0)) {
                 if (c == '\n')
@@ -39,13 +39,17 @@ char* OpenFile(/*char *filename*/int flag){
     return m;
 }
 
-int main() {
+void findstring_();
+
+int main(int argc, char *argv[]) {
     char *token;
     char *text;
 
-    token = OpenFile(0);
-    text = OpenFile(1);
-    printf("%s", token);
+    token = OpenFile("teste1.txt", 0);
+    text = OpenFile("teste1.txt", 1);
+    printf("%s\n", token);
+
+    findstring_();
 
     free(text);
     return 0;

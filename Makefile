@@ -10,19 +10,20 @@ FFLAGSO=-o
 all: fortran
 
 #Fortran files .o
-toto.o: $(F90) $(FFLAGS) toto.f
+fmodule.o: fmodule.f90
+	$(F90) $(CFLAGS) fmodule.f90
 
 #C files .o
-toto.o: toto.f
-	$(CC) $(CFLAGS) totoc.c
+#cmod.o: fmodule.f90
+#	$(CC) $(CFLAGS) cmodule.c
 
-totoc.o: totoc.c
-	$(CC) $(CFLAGS) totoc.c
+cmodule.o: cmodule.c
+	$(CC) $(CFLAGS) cmodule.c
 
-test: toto.o totoc.o
-	$(F90) $(FFLAGSO) test toto.o totoc.o 
+test: fmodule.o cmodule.o
+	$(F90) $(FFLAGSO) test cmodule.o fmodule.o 
 
-fortran: test
+run: test
 	./test
 
 clean:
