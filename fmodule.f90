@@ -1,5 +1,6 @@
-function FINDSTRING()
+function FINDSTRING(str)
 
-    print *, "Teste de chamada do fortran ok!"
+    
+    write (*,*) str
 
 end function FINDSTRING

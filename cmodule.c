@@ -39,7 +39,7 @@ char* OpenFile(char filename[], int flag){
     return m;
 }
 
-void findstring_();
+void findstring_(char str[]);
 
 int main(int argc, char *argv[]) {
     char *token;
@@ -49,7 +49,7 @@ int main(int argc, char *argv[]) {
     text = OpenFile("teste1.txt", 1);
     printf("%s\n", token);
 
-    findstring_();
+    findstring_(text);
 
     free(text);
     return 0;

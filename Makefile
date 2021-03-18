@@ -1,5 +1,3 @@
-#Just for tests
-
 CC=gcc
 F90=gfortran
 
@@ -14,17 +12,17 @@ fmodule.o: fmodule.f90
 	$(F90) $(CFLAGS) fmodule.f90
 
 #C files .o
-#cmod.o: fmodule.f90
-#	$(CC) $(CFLAGS) cmodule.c
-
 cmodule.o: cmodule.c
 	$(CC) $(CFLAGS) cmodule.c
 
+#Compile output files
 test: fmodule.o cmodule.o
 	$(F90) $(FFLAGSO) test cmodule.o fmodule.o 
 
+#Run test
 run: test
 	./test
 
+#Remove temp files
 clean:
 	rm -rf *.o test
