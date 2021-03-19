@@ -1,9 +1,12 @@
-integer function FINDSTRING(str)
+integer function FINDSTRING(str, len)
     !Declaracao de variaveis
-    integer :: a;
+    integer :: cont
+    !integer :: len
+    character (*) :: str
 
     !Funcoes
     cont=13;
+    !print*, len
     write (*,*) str
 
     !Saida

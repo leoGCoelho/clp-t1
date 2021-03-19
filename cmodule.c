@@ -49,7 +49,7 @@ char* OpenFile(char filename[]){
 }
 
 // Funcao de link entre Fortran e o C
-int findstring_(char str[]);
+int findstring_(char str[], int len);
 
 // Main
 int main(int argc, char *argv[]) {
@@ -58,14 +58,10 @@ int main(int argc, char *argv[]) {
     // Extracao do texto e substrings
     src = OpenFile("teste1.txt");
     token = GetToken(src);
-    text = GetText(src, strlen(src));
-
-    // Teste dos textos
-    printf("%lu\n", strlen(text));
-    printf("%s\n", text);
+    text = GetText(src, (int)strlen(src));
 
     // Funcao de link
-    int res = findstring_(token);
+    int res = findstring_(text, (int)strlen(text));
     printf("\nO token aparece %d vezes\n\n", res);
 
     // Liberar memoria
