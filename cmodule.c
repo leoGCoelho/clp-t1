@@ -1,35 +1,44 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
-char* OpenFile(char filename[], int flag){
+// Funcao para obter o texto da 1a linha
+char* GetToken(char *src){
+    int i=0;
+    while(src[i] != '\n') i++;
+    char* token = (char*) malloc((i+1)*sizeof(char));
+
+    strncpy(token, src, i);
+    token[i] = '\0';
+
+    printf("\n");
+    return token;
+}
+
+// Funcao para obter o texto das (n-1) linhas
+char* GetText(char *src, int len){
+    int i=0;
+    while(src[i] != '\n') i++;
+    char* text = (char*) malloc((len-i)*sizeof(char));
+
+    strncpy(text, src+(i+1), len-i);
+
+    printf("\n");
+    return text;
+}
+
+// Funcao para extrair o texto de um arquivo
+char* OpenFile(char filename[]){
     FILE *fp;
     char c;
-    int n=0, lines=0;
+    int n=0;
     char *m = (char*) malloc(sizeof(char));
 
     if ((fp=fopen (filename,"r")) != NULL) {
-        if (flag == 0){
-            while( ((c=fgetc(fp)) !=EOF) && (lines == 0)) {
-                if (c == '\n')
-                    lines++;
-                    
-                m = (char*) realloc(m, (n+1) *sizeof(char));
-                m[n] = c;
-                n++;
-            }
-        }
-        else{
-            while( ((c=fgetc(fp)) !=EOF) ) {
-                if (c == '\n')
-                    lines++;
-                else{
-                    if (lines > 0){
-                        m = (char*) realloc(m, (n+1) *sizeof(char));
-                        m[n] = c;
-                        n++;
-                    }
-                }
-            }
+        while( ((c=fgetc(fp)) !=EOF)) {
+            m = (char*) realloc(m, (n+1) *sizeof(char));
+            m[n] = c;
+            n++;
         }
 
         fclose(fp);
@@ -39,18 +48,30 @@ char* OpenFile(char filename[], int flag){
     return m;
 }
 
-void findstring_(char str[]);
+// Funcao de link entre Fortran e o C
+int findstring_(char str[]);
 
+// Main
 int main(int argc, char *argv[]) {
-    char *token;
-    char *text;
+    char *token, *text, *src;
 
-    token = OpenFile("teste1.txt", 0);
-    text = OpenFile("teste1.txt", 1);
-    printf("%s\n", token);
+    // Extracao do texto e substrings
+    src = OpenFile("teste1.txt");
+    token = GetToken(src);
+    text = GetText(src, strlen(src));
 
-    findstring_(text);
+    // Teste dos textos
+    printf("%lu\n", strlen(text));
+    printf("%s\n", text);
 
+    // Funcao de link
+    int res = findstring_(token);
+    printf("\nO token aparece %d vezes\n\n", res);
+
+    // Liberar memoria
+    free(src);
+    free(token);
     free(text);
+
     return 0;
 }
