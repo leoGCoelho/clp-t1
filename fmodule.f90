@@ -1,13 +1,17 @@
-integer function FINDSTRING(str, len)
+integer function FINDSTRING(text, textlen, token, tokenlen)
     !Declaracao de variaveis
     integer :: cont
-    !integer :: len
-    character (*) :: str
+    integer :: textlen
+    integer :: tokenlen
+    character (LEN=textlen) :: text
+    character (LEN=tokenlen) :: token
 
     !Funcoes
     cont=13;
-    !print*, len
-    write (*,*) str
+    print*, tokenlen
+    write (*,*) token
+    print*, textlen
+    write (*,*) text
 
     !Saida
     FINDSTRING = cont;
