@@ -1,7 +1,7 @@
 CC=gcc
 F90=gfortran
 
-CFLAGS=-c
+CFLAGS=-c -w
 FFLAGS=-ffree-form -c
 FFLAGSO=-o
 
