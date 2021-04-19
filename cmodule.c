@@ -55,9 +55,6 @@ char *OpenFile(char filename[])
     return m;
 }
 
-// Funcao de link entre Fortran e o C
-int findstring_(char *text, int *textLen, char *token, int *tokenLen);
-
 // Main
 int main(int argc, char *argv[])
 {
@@ -73,7 +70,7 @@ int main(int argc, char *argv[])
     tokenLen = (int)strlen(token);
 
     // Funcao de link
-    int res = findstring_(text, &textLen, token, &tokenLen);
+    int res = findstring(text, &textLen, token, &tokenLen);
     printf("\nO token aparece %d vezes\n\n", res);
 
     // Liberar memoria
