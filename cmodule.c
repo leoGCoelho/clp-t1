@@ -1,6 +1,29 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
+
+// Verifica tamanho do texto
+int IsValid(char *src, int len, int tokenLen, char *token){
+    int i;
+    int lines = 1;
+    int flagToken = 0;
+
+    for(i=0; i<len; ++i){
+        if(src[i] == '\n')
+            lines++;
+    }
+
+    for(i=0; i<tokenLen; ++i){
+        if(!(isalnum(token[i])))
+            flagToken = 1;
+    }
+
+    if((lines >= 2) && (tokenLen < 20) && (flagToken == 0))
+        return 1;
+    else
+        return 0;
+}
 
 // Funcao para obter o texto da 1a linha
 char *GetToken(char *src)
@@ -61,6 +84,8 @@ int main(int argc, char *argv[])
     char *token, *text, *src;
     int textLen, tokenLen;
 
+    printf("\n\n");
+
     // Extracao do texto e substrings
     src = OpenFile("teste1.txt");
     token = GetToken(src);
@@ -68,6 +93,11 @@ int main(int argc, char *argv[])
 
     textLen = (int)strlen(text);
     tokenLen = (int)strlen(token);
+
+    if(!(IsValid(src, (int)strlen(src), tokenLen, token))){
+        printf("Formato de texto inválido!\n");
+        return 0;
+    }
 
     // Funcao de link
     int res = findstring(text, &textLen, token, &tokenLen);
