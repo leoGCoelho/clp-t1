@@ -17,11 +17,12 @@ cmodule.o: cmodule.c
 
 #Compile output files
 test: fmodule.o cmodule.o
-	$(F90) $(FFLAGSO) test cmodule.o fmodule.o 
+	$(F90) $(FFLAGSO) test cmodule.o fmodule.o
 
 #Run test
 run: test
 	./test
+	rm -rf *.o test
 
 #Remove temp files
 clean:
